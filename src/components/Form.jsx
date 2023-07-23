@@ -1,70 +1,76 @@
-import { Component } from "react";
-import { Button } from "./Button";
+import { Component } from 'react';
+import { Button } from './Button';
 
-const INITIAL_STATE  = {
-    name: '',
-    number: ''
-}
+const INITIAL_STATE = {
+  name: '',
+  number: '',
+};
 
-export class  Form extends Component {
-  
-    state = { ...INITIAL_STATE };
+export class Form extends Component {
+  state = { ...INITIAL_STATE };
 
-handleInput = evt => {
-        this.setState({ name: evt.target.value });
-      }
+  handleInput = evt => {
+    const { name, value } = evt.target;
+    this.setState({ [name]: value });
+  };
 
-handleNumber = evt => {
-        this.setState({ number: evt.target.value });
-      }
-      
-handleSubmit = evt => {
-        evt.preventDefault();
-        // const { name, number } = this.state;
-        this.props.onSubmit({ ...this.state });
-        this.reset();
-      };
-    
-      reset = () => {
-        this.setState({ ...INITIAL_STATE });
-      };
+  // handleNumber = evt => {
+  //         this.setState({ number: evt.target.value });
+  //       }
 
-    render () {
-    const {name, number} = this.state;
+  handleSubmit = evt => {
+    console.log(evt);
+    evt.preventDefault();
+    // const { name, number } = evt.target;
+    // if (name.length === 0 || number.length === 0) {
+    //   alert('Fields must be filled!');
+    //   return;
+    // }
+    this.props.onSubmit({ ...this.state });
+    this.reset();
+  };
 
-        return (
-        <form onSubmit={this.handleSubmit}>
-        <label  style={{       
-    display: 'flex',
-    }}>
-       Name
-  <input
-        
-  type="text"
-  name="name"
-  value={name}
-  pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-  title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-  required
-  onChange = {this.handleInput}
-/>
-</label>
+  reset = () => {
+    this.setState({ ...INITIAL_STATE });
+  };
 
-<label>
-Number
-<input
-  type="tel"
-  name="number"
-  value={number}
-  pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-  title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-  required
-  onChange = {this.handleNumber}
-/>
-<br/>
-</label>
-<Button/>
-</form>
-)
-}
+  render() {
+    const { name, number } = this.state;
+
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label
+          style={{
+            display: 'flex',
+          }}
+        >
+          Name
+          <input
+            type="text"
+            name="name"
+            value={name}
+            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            required
+            onChange={this.handleInput}
+          />
+        </label>
+
+        <label>
+          Number
+          <input
+            type="tel"
+            name="number"
+            value={number}
+            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+            required
+            onChange={this.handleInput}
+          />
+          <br />
+        </label>
+        <Button />
+      </form>
+    );
+  }
 }
