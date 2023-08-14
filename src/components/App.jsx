@@ -23,7 +23,7 @@ export class App extends Component {
 
     // console.log(this.state.contacts[0].name);
     // console.log(searchSameName);
-    if (searchSameName) {
+    if (searchSameName.length > 0) {
       alert(`${data.name} is already in contacts`);
       return;
     }
