@@ -16,11 +16,16 @@ export class App extends Component {
     filter: '',
   };
 
-  formSubmitHandler = data => {
-    const searchSameName = this.state.contacts.filter(
-      cont => cont.name.toLowerCase() === data.name.toLowerCase()
-    );
+    //  formSubmitHandler = data => {
+    //     const searchSameName = this.state.contacts.filter(
+      //    cont => cont.name.toLowerCase() === data.name.toLowerCase()
+      //  );
 
+    formSubmitHandler = data => {
+      const searchSameName = this.state.contacts.some(
+        cont => cont.name.toLowerCase() === data.name.toLowerCase()
+      );
+  
     // console.log(this.state.contacts[0].name);
     // console.log(searchSameName);
     if (searchSameName.length > 0) {
