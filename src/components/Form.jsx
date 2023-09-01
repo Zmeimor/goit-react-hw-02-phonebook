@@ -14,18 +14,9 @@ export class Form extends Component {
     this.setState({ [name]: value });
   };
 
-  // handleNumber = evt => {
-  //         this.setState({ number: evt.target.value });
-  //       }
-
   handleSubmit = evt => {
     console.log(evt);
     evt.preventDefault();
-    // const { name, number } = evt.target;
-    // if (name.length === 0 || number.length === 0) {
-    //   alert('Fields must be filled!');
-    //   return;
-    // }
     this.props.onSubmit({ ...this.state });
     this.reset();
   };

@@ -16,22 +16,15 @@ export class App extends Component {
     filter: '',
   };
 
-    //  formSubmitHandler = data => {
-    //     const searchSameName = this.state.contacts.filter(
-      //    cont => cont.name.toLowerCase() === data.name.toLowerCase()
-      //  );
-
     formSubmitHandler = data => {
       const searchSameName = this.state.contacts.some(
         cont => cont.name.toLowerCase() === data.name.toLowerCase()
       );
   
-    // console.log(this.state.contacts[0].name);
-    // console.log(searchSameName);
-    if (searchSameName.length > 0) {
-      alert(`${data.name} is already in contacts`);
-      return;
-    }
+      if (searchSameName) {
+        alert(`${data.name} is already in contacts`);
+        return;
+      }
     const contact = {
       ...data,
       id: nanoid(),
@@ -40,7 +33,6 @@ export class App extends Component {
     this.setState(prevState => ({
       contacts: [...prevState.contacts, contact],
     }));
-    // console.log(this.state);
   };
 
   changeFilter = filter => {
@@ -49,7 +41,6 @@ export class App extends Component {
 
   getVisibleContacts = () => {
     const { contacts, filter } = this.state;
-    // console.log(this.state);
     return contacts.filter(contacts =>
       contacts.name.toLowerCase().includes(filter.toLowerCase())
     );
